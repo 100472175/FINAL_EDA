@@ -3,6 +3,7 @@ import unittest
 import graphproblem as gp
 import copy
 
+
 class Test_MyGraph(unittest.TestCase):
     mark = 0
 
@@ -269,5 +270,4 @@ class Test_MyGraph(unittest.TestCase):
 
 
 if __name__ == "__main__":
-
     unittest.main()
