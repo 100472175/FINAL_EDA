@@ -20,7 +20,6 @@ def find_first_last(a: list, x: int) -> (int, int):
     return result1, result2
 
 
-
 def _find_first_last(array, x, start, end):
     if start > end:
         return sys.maxsize, sys.maxsize  # We will later change it to -1, -1
@@ -43,7 +42,7 @@ def _find_first_last(array, x, start, end):
     else:
         return sys.maxsize, sys.maxsize
 
-
+    # Worst iteration, failing with 1 occurrence, 2 occurrences and more than 2, F=(3, 4, 4_a, 5, 6, 6_a, 7, 8)
     """if first_last1[0] < first_last2[0]:
         a = first_last1[0]  # a is the first index of x in the list
     else:
@@ -56,7 +55,7 @@ def _find_first_last(array, x, start, end):
 
     return a, b"""
 
-
+    # Failed : 7, passed 4 (Failed in 3, 4, 5, 6, 6_a, 7, 8)
     """if first_last1[0] != -1:
         return first_last1[0], first_last1[1]
     elif first_last2[0] != -1:
@@ -64,7 +63,7 @@ def _find_first_last(array, x, start, end):
     else:
         return -1, -1"""
 
-
+    # First iteration, with only some test running correctly Filed 7, passed 4(Failed in 3, 4, 5, 6, 6_a, 7, 8)
     """if first_last1[0] != -1:
         return first_last1
     if first_last2[0] != -1:
