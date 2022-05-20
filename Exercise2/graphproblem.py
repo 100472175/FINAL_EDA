@@ -1,3 +1,5 @@
+# Eduardo Alarcón (1000472175)
+
 def compare_lists(list1: list, list2: list) -> bool:
     if len(list1) != len(list2):
         return False
@@ -7,6 +9,7 @@ def compare_lists(list1: list, list2: list) -> bool:
         if a != b:
             return False
     return True
+
 
 class MyGraph:
     """Implementation of an undirected and unweighted graph"""
@@ -113,7 +116,6 @@ class MyGraph:
                     queue.append(adj)
                     visited[adj] = True
 
-
     def is_bridge(self, v1: str, v2: str) -> bool:
         if v1 is None or v2 is None:
             return False
@@ -145,8 +147,6 @@ class MyGraph:
         else:
             self.add_edge(v1, v2)
             return True
-
-
 
 
 if __name__ == '__main__':
