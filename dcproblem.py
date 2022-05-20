@@ -6,7 +6,7 @@ def find_first_last(a: list, x: int) -> (int, int):
     # Returns the first and last index of a given value in a list
     # If the value is not in the list, return (-1, -1)
     # If the value is in the list, return the first and last index of the value
-    # If the value is in the list, but only once, return the first and last index of the value
+    # If the value is in the list, but only once, returns the same index
 
     if a is None or len(a) == 0 or x is None:
         return -1, -1  # There is no need to put a parenthesis here, as it is the default return value
@@ -21,18 +21,26 @@ def find_first_last(a: list, x: int) -> (int, int):
 
 
 def _find_first_last(array, x, start, end):
+    # Protection of code, if the end index is higher than the start index, returns the same as if there were
+    # no elements found in the list
     if start > end:
-        return -1, -1  # We will later change it to -1, -1
+        return -1, -1  # Parenthesis are not needed, as it is the default return value
+
+    # Base case, when there is only one element inside the domain being analyzed
     if start == end:
         if array[start] == x:
-            return start, start  # There is no need to put a parenthesis here, as it is the default return value
+            return start, start  # Same here
         else:
-            return -1, -1  # We will later change it to -1, -1
+            return -1, -1  # Same here
 
+    # Obtain the middle of the lists
     mid = (start + end) // 2
+
+    # Recursion
     first_last1 = _find_first_last(array, x, start, mid)
     first_last2 = _find_first_last(array, x, mid + 1, end)
 
+    # Merging the results
     if first_last1[0] != -1 and first_last2[0] != -1:
         return min(first_last1[0], first_last2[0]), max(first_last1[1], first_last2[1])
     elif first_last1[0] != -1:
