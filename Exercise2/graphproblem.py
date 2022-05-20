@@ -1,4 +1,5 @@
 # Eduardo Alarcón (1000472175)
+import copy
 
 def compare_lists(list1: list, list2: list) -> bool:
     if len(list1) != len(list2):
@@ -128,13 +129,28 @@ class MyGraph:
 
         # There are two ways of approaching this final step of the algorithm:
         # 1. We can create a copy of the graph and remove the edge and check if the copied graph is connected
+        #    This is more efficient as we do not need to add the edge back again
         # 2. We can use the original graph and remove the edge and check if the original graph is connected and
         #    add the edge back to the original graph
         # First option is faster, but it is not always possible to create a copy of the graph, as it might be a database
-        # or a file.
-        # Second option is slower, but it is always possible to delete the edge and then adding it back.
-        # Thus, we will use the second option.
+        # or a file and memory is finite.
+        # Second option is slower, but it is always possible to delete the edge and then adding it back, which is
+        # slower but consumes double the memory
+        # As asked in the exam, we will use the more temporal efficient algorithm
 
+
+        # First approach (temporal efficient, takes less time):
+        cp = copy.deepcopy(self)
+
+        cp.remove_edge(v1, v2)
+        a = cp.is_connected()
+        if a:
+            return False
+        else:
+            return True
+
+
+        """# Second approach (spacial efficient, consumes less memory)
         # We remove the edge v1-v2 from the original graph
         self.remove_edge(v1, v2)
 
@@ -142,11 +158,11 @@ class MyGraph:
         # If cp.is_connected is True, then v1-v2 is not a bridge, as there is still a path
         if self.is_connected():
             self.add_edge(v1, v2)
-            return False
+            # return False ##################################################
         # If it is False, meaning there is no path from v1 to v2, then v1-v2 is a bridge
         else:
             self.add_edge(v1, v2)
-            return True
+            # return True ##################################################"""
 
 
 if __name__ == '__main__':
