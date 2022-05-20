@@ -12,12 +12,6 @@ def find_first_last(a: list, x: int) -> (int, int):
     if a is None or len(a) == 0 or x is None:
         return -1, -1  # There is no need to put a parenthesis here, as it is the default return value
     result1, result2 = _find_first_last(a, x, 0, len(a) - 1)
-
-    if result1 == sys.maxsize:
-        result1 = -1
-    if result2 == sys.maxsize:
-        result2 = -1
-
     return result1, result2
 
 
@@ -103,7 +97,6 @@ def _find_first_last(array, x, start, end):
     if first_last2[0] != -1:
         return first_last2"""
 
-
 if __name__ == "__main__":
     b = [5, -2, 3, -2, 3, 6, 6, 0, 1, 2, -1, -1, 5]
     print(b)
@@ -128,4 +121,3 @@ if __name__ == "__main__":
     print("For the list ltt2: ", ltt2)
     first, last = find_first_last(ltt2, -2)
     print("x: ", value, ", first index:", first, ", last index: ", last)
-
