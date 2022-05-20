@@ -1,3 +1,4 @@
+# Eduardo Alarcón (100472175)
 import sys
 
 
@@ -113,3 +114,18 @@ if __name__ == "__main__":
     value = 4  # does not exist
     first, last = find_first_last(b, value)
     print("x: ", value, ", first index:", first, ", last index: ", last)
+
+    # These are the examples provided in the instruction PDF
+    ltt1 = [-2, 3, -2, 3, 0, 1, 2, -1, -1, 5]
+    ltt2 = []
+    elements = [-2, 3, 0, -1, 4, 5, -2]
+
+    print("For the list ltt1: ", ltt1)
+    for value in elements:
+        first, last = find_first_last(ltt1, value)
+        print("x: ", value, ", first index:", first, ", last index: ", last)
+
+    print("For the list ltt2: ", ltt2)
+    first, last = find_first_last(ltt2, -2)
+    print("x: ", value, ", first index:", first, ", last index: ", last)
+
