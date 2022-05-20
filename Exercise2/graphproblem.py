@@ -40,6 +40,23 @@ class MyGraph:
         self._vertices[v1].append(v2)
         self._vertices[v2].append(v1)
 
+    def remove_edge(self, v1: str, v2: str) -> None:
+        if not self.check_vertex(v1):
+            print(v1, " is not a vertex!!!")
+            return
+        if not self.check_vertex(v2):
+            print(v2, " is not a vertex!!!")
+            return
+        if v1 == v2:
+            print("({},{}) loops edges are not allowed!".format(v1, v2))
+            return
+        if v2 not in self._vertices[v1] or v1 not in self._vertices[v2]:
+            print("({},{}) multiple edges are not allowed!".format(v1, v2))
+            return
+
+        self._vertices[v1].remove(v2)
+        self._vertices[v2].remove(v1)
+
     def __eq__(self, other: 'MyGraph') -> bool:
         if other is None:
             return False
@@ -71,10 +88,65 @@ class MyGraph:
 
     def is_connected(self) -> bool:
         """returns True if the graph is connected, False eoc"""
-        return None
+        visited = {}
+        for v in self._vertices.keys():
+            visited[v] = False
+
+        for vv in self._vertices.keys():
+            if visited[vv] == False:
+                self._bfs(vv, visited)
+            if False in visited.values():
+                return False
+        return True
+
+    # Function to do a BFS of graph
+    def _bfs(self, v, visited):
+        """This function does the BFS traversal"""
+        queue = [v]
+        visited[v] = True
+
+        while queue:
+            s = queue.pop(0)
+            print(s, end=" ")
+            for adj in self._vertices[s]:
+                if visited[adj] == False:
+                    queue.append(adj)
+                    visited[adj] = True
+
 
     def is_bridge(self, v1: str, v2: str) -> bool:
-        return None
+        if v1 is None or v2 is None:
+            return False
+        if v1 == v2:
+            return False
+        if v1 not in self._vertices or v2 not in self._vertices:
+            return False
+        if v1 not in self._vertices[v2] or v2 not in self._vertices[v1]:
+            return False
+
+        # There are two ways of aproaching this final step of the algorithm:
+        # 1. We can create a copy of the graph and remove the edge and check if the copied graph is connected
+        # 2. We can use the original graph and remove the edge and check if the original graph is connected and
+        #    add the edge back to the original graph
+        # First option is faster, but it is not always possible to create a copy of the graph, as it might be a database
+        # or a file.
+        # Second option is slower, but it is always possible to delete the edge and then adding it back.
+        # Thus, we will use the second option.
+
+        # We remove the edge v1-v2 from the original graph
+        self.remove_edge(v1, v2)
+
+        # Using the function previously defined, we check if the graph is connected
+        # If cp.is_connected is True, then v1-v2 is not a bridge, as there is still a path
+        if self.is_connected():
+            self.add_edge(v1, v2)
+            return False
+        # If it is False, meaning there is no path from v1 to v2, then v1-v2 is a bridge
+        else:
+            self.add_edge(v1, v2)
+            return True
+
+
 
 
 if __name__ == '__main__':
