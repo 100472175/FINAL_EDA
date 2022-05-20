@@ -92,27 +92,27 @@ class MyGraph:
     def is_connected(self) -> bool:
         """returns True if the graph is connected, False eoc"""
         visited = {}
-        for v in self._vertices.keys():
-            visited[v] = False
+        for vertex in self._vertices.keys():
+            visited[vertex] = False
 
-        for vv in self._vertices.keys():
-            if visited[vv] == False:
-                self._bfs(vv, visited)
+        for vert in self._vertices.keys():
+            if not visited[vert]:
+                self._bfs(vert, visited)
             if False in visited.values():
                 return False
         return True
 
     # Function to do a BFS of graph
-    def _bfs(self, v, visited):
-        """This function does the BFS traversal"""
-        queue = [v]
-        visited[v] = True
+    def _bfs(self, vertex, visited):
+        # This function does the BFS traversal of a graph
+        queue = [vertex]
+        visited[vertex] = True
 
         while queue:
             s = queue.pop(0)
             print(s, end=" ")
             for adj in self._vertices[s]:
-                if visited[adj] == False:
+                if not visited[adj]:
                     queue.append(adj)
                     visited[adj] = True
 
@@ -126,7 +126,7 @@ class MyGraph:
         if v1 not in self._vertices[v2] or v2 not in self._vertices[v1]:
             return False
 
-        # There are two ways of aproaching this final step of the algorithm:
+        # There are two ways of approaching this final step of the algorithm:
         # 1. We can create a copy of the graph and remove the edge and check if the copied graph is connected
         # 2. We can use the original graph and remove the edge and check if the original graph is connected and
         #    add the edge back to the original graph
