@@ -1,6 +1,7 @@
 # Eduardo Alarcón (1000472175)
 import copy
 
+
 def compare_lists(list1: list, list2: list) -> bool:
     if len(list1) != len(list2):
         return False
@@ -138,31 +139,30 @@ class MyGraph:
         # slower but consumes double the memory
         # As asked in the exam, we will use the more temporal efficient algorithm
 
-
         # First approach (temporal efficient, takes less time):
         cp = copy.deepcopy(self)
 
         cp.remove_edge(v1, v2)
         a = cp.is_connected()
         if a:
+
             return False
         else:
             return True
 
-
-        """# Second approach (spacial efficient, consumes less memory)
+        # Second approach (spacial efficient, consumes less memory)
         # We remove the edge v1-v2 from the original graph
-        self.remove_edge(v1, v2)
+        """self.remove_edge(v1, v2)
 
         # Using the function previously defined, we check if the graph is connected
         # If cp.is_connected is True, then v1-v2 is not a bridge, as there is still a path
         if self.is_connected():
             self.add_edge(v1, v2)
-            # return False ##################################################
+            return False
         # If it is False, meaning there is no path from v1 to v2, then v1-v2 is a bridge
         else:
             self.add_edge(v1, v2)
-            # return True ##################################################"""
+            return True"""
 
 
 if __name__ == '__main__':

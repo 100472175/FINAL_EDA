@@ -1,3 +1,4 @@
+import time
 import unittest
 import graphproblem as gp
 import copy
@@ -232,6 +233,7 @@ class Test_MyGraph(unittest.TestCase):
         Test_MyGraph.mark += 1
 
     def test_14(self):
+        a = time.time()
         """ is_bridge: False"""
         print("\n test_14: is_bridge: False")
         input_g3 = copy.deepcopy(self.g3)
@@ -245,6 +247,7 @@ class Test_MyGraph(unittest.TestCase):
         # self.g3 must be equal to the original
         self.assertEqual(self.g3, input_g3)
         Test_MyGraph.mark += 1
+        print('time = ', time.time() - a)
 
     def test_15(self):
         """ is_bridge: False"""
@@ -266,4 +269,5 @@ class Test_MyGraph(unittest.TestCase):
 
 
 if __name__ == "__main__":
+
     unittest.main()
