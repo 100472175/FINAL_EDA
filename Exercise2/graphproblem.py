@@ -145,7 +145,6 @@ class MyGraph:
         cp.remove_edge(v1, v2)
         a = cp.is_connected()
         if a:
-
             return False
         else:
             return True
